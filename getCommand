@@ -1,0 +1,37 @@
+from flask import Flask,jsonify
+app = Flask(__name__)
+courses = [{'name': "Physics",
+            'course _id': "0",
+            'description': "Thermodynamics and Quantum Mechanics",
+            'price': "$50"},
+           {'name': "Chemistry",
+            'course _id': "1",
+            'description': "Organic Chemistry and Physical Chemistry",
+            'price': "$60"},
+           {'name': "Math",
+            'course _id': "2",
+            'description': "Geometry and Trigonometry",
+            'price': "70"},
+           {'name': "Geography",
+            'course _id': "3",
+            'description': "Contour mapping and geology",
+            'price': "$80"},
+           {'name': "Biology",
+            'course _id': "4",
+            'description': "Cells and tissue",
+            'price': "$50"}
+
+]
+
+@app.route('/')
+def index():
+    return "Welcome to the course"
+
+@app.route("/courses", methods= ['GET'])
+def get():
+    return jsonify({'Courses': courses})
+@app.route("/courses/<int:course_id>",methods=['GET'])
+def get_course(course_id):
+    return jsonify({'course': courses[course_id]})
+if __name__ == "__main__":
+    app.run(debug=True)
